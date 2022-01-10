@@ -8,6 +8,11 @@ public class Jarvis.HeaderBar : Gtk.HeaderBar {
         set_show_close_button(true);
 
         // add button
+        var add_button = new Gtk.Button.with_label("Add");
+        add_button.get_style_context().add_class("suggested-action");
+        add_button.valign = Gtk.Align.CENTER;
+        pack_start(add_button);
+
         // add icon button -> submenu popup
     }
 }
