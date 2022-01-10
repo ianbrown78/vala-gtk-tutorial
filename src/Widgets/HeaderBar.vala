@@ -17,6 +17,10 @@ public class Jarvis.HeaderBar : Gtk.HeaderBar {
         add_button.valign = Gtk.Align.CENTER;
         pack_start(add_button);
 
+        add_button.clicked.connect(() => {
+            open_dialog();
+        });
+
         // Add a stack & switcher
         var stack_switcher = new Gtk.StackSwitcher();
         stack_switcher.stack = main_window.stack;        
@@ -26,5 +30,23 @@ public class Jarvis.HeaderBar : Gtk.HeaderBar {
         var menu_button = new Gtk.Button.from_icon_name("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
         menu_button.valign = Gtk.Align.CENTER;
         pack_end(menu_button);
+    }
+
+    public void open_dialog(){
+        var dialog = new Gtk.Dialog.with_buttons(
+            "Add a new note",
+            main_window,
+            Gtk.DialogFlags.MODAL | 
+            Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            "Custom Button", 1,
+            "Second Button", 2, null
+        );
+
+        var label = new Gtk.Label("This is the content");
+        var content_area = dialog.get_content_area();
+        content_area.add(label);
+
+        dialog.show_all();
+        dialog.present();
     }
 }
