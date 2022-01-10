@@ -6,9 +6,9 @@ public class Jarvis.Window : Gtk.ApplicationWindow {
     }
 
     private GLib.Settings settings;
+    public Gtk.Stack stack { get; set; }
 
     construct {
-        //title = "This is my Vala Test";
         window_position = Gtk.WindowPosition.CENTER;
         set_default_size(300, 600);
 
@@ -21,7 +21,20 @@ public class Jarvis.Window : Gtk.ApplicationWindow {
             return before_destroy();
         });
 
-        var headerbar = new Jarvis.HeaderBar();
+        stack = new Gtk.Stack();
+        stack.expand = true;
+
+        var outstanding = new Gtk.Grid();
+        outstanding.add(new Gtk.Label("Outstanding Tasks"));
+        var completed = new Gtk.Grid();
+        completed.add(new Gtk.Label("Completed Tasks"));
+
+        stack.add_titled(outstanding, "outstanding", "Outstanding");
+        stack.add_titled(completed, "completed", "Completed");
+
+        add(stack);
+
+        var headerbar = new Jarvis.HeaderBar(this);
         set_titlebar(headerbar);
         
         show_all();
