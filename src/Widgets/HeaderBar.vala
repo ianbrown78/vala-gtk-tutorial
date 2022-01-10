@@ -14,5 +14,8 @@ public class Jarvis.HeaderBar : Gtk.HeaderBar {
         pack_start(add_button);
 
         // add icon button -> submenu popup
+        var menu_button = new Gtk.Button.from_icon_name("open-menu", Gtk.IconSize.LARGE_TOOLBAR);
+        menu_button.valign = Gtk.Align.CENTER;
+        pack_end(menu_button);
     }
 }
